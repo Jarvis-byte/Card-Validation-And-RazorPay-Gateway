@@ -12,22 +12,30 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
-    TextInputEditText inputtxtCardNumber, inputtxtExpirationDate, inputtxtSecurityCode, inputtxtFirstName, inputtxtLastName;
-    String CardNumber, Cvv, expiryDate;
+public class MainActivity extends AppCompatActivity implements PaymentResultListener {
+    TextInputEditText inputtxtCardNumber, inputtxtExpirationDate, inputtxtSecurityCode, inputtxtFirstName, inputtxtLastName, inputtxtAmount;
+    String CardNumber, Cvv, expiryDate, amount;
     int FirstDigit, SecondDigit;
     Button btnSubmit;
     InputMethodManager inputMethodManager1;
+    Button btnPay;
+    String TAG = "MainActivity Payment";
+
     private TextWatcher mDateEntryWatcher = new TextWatcher() {
 
         @Override
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -68,12 +77,43 @@ public class MainActivity extends AppCompatActivity {
         inputtxtSecurityCode = findViewById(R.id.inputtxtSecurityCode);
         inputtxtFirstName = findViewById(R.id.inputtxtFirstName);
         inputtxtLastName = findViewById(R.id.inputtxtLastName);
-
+        inputtxtAmount = findViewById(R.id.inputtxtAmount);
         inputtxtCardNumber.requestFocus();
         inputMethodManager1 = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager1.showSoftInput(inputtxtCardNumber, inputMethodManager1.SHOW_IMPLICIT);
         btnSubmit = findViewById(R.id.btnSubmit);
 
+        btnPay = findViewById(R.id.btnPay);
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (TextUtils.isEmpty(inputtxtAmount.getText().toString())) {
+                    inputtxtAmount.setError("This Field Can't be Empty!!!");
+                    inputtxtAmount.requestFocus();
+                    inputMethodManager1 = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager1.showSoftInput(inputtxtAmount, inputMethodManager1.SHOW_IMPLICIT);
+                }
+                amount = inputtxtAmount.getText().toString().trim();
+                int MainAmount = Math.round(Float.parseFloat(amount) * 100);
+                Checkout checkout1 = new Checkout();
+                checkout1.setKeyID("rzp_test_5HZySydZ73qHoN");
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("name", "Arkoooo");
+                    jsonObject.put("description", "Test Payment");
+                    jsonObject.put("theme.color", "#0093DD");
+                    jsonObject.put("currency", "INR");
+                    jsonObject.put("amount", MainAmount);
+                    checkout1.open(MainActivity.this, jsonObject);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        Checkout.preload(getApplicationContext());
         Date c = Calendar.getInstance().getTime();
 
 
@@ -145,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     inputMethodManager1 = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager1.showSoftInput(inputtxtExpirationDate, inputMethodManager1.SHOW_IMPLICIT);
 
-                } else if (inputMonth < todaysMonth && inputYear > todaysYear) {
+                } else if (inputMonth < todaysMonth && inputYear == todaysYear) {
                     inputtxtExpirationDate.setError("This Card Has Expired");
                     inputtxtExpirationDate.requestFocus();
                     inputMethodManager1 = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -209,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     } else
-                        //  Toast.makeText(MainActivity.this, "Invalid Card Number", Toast.LENGTH_SHORT).show();
+
                         inputtxtCardNumber.setError("Invalid Card Number");
                     inputtxtCardNumber.requestFocus();
                     inputMethodManager1 = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -239,4 +279,18 @@ public class MainActivity extends AppCompatActivity {
         }
         return (Sum % 10 == 0);
     }
+
+
+    @Override
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(this, "Payment Successful " + s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(this, "Error" + s, Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "OnPaymentError" + s);
+
+    }
+
 }

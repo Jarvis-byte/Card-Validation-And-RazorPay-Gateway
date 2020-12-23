@@ -1,123 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/CardNumber"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Card Number"
-
-        app:boxStrokeColor="#4AAC4F">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputtxtCardNumber"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:inputType="number"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <GridLayout
-        android:id="@+id/Grid_Layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/CardNumber"
-
-        android:columnCount="2">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ExpirationDate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="MM/YY"
-            app:boxStrokeColor="#4AAC4F">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputtxtExpirationDate"
+            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/CardNumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="5"
-                android:inputType="date"/>
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="8dp"
+                android:hint="Card Number"
+                app:boxStrokeColor="#4AAC4F">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputtxtCardNumber"
+                    android:layout_width="match_parent"
+                    android:inputType="number"
+                    android:layout_height="wrap_content" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/SecurityCode"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Security Code"
-            app:boxStrokeColor="#4AAC4F">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputtxtSecurityCode"
+            <GridLayout
+                android:id="@+id/Grid_Layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLength="4"/>
+                android:layout_below="@+id/CardNumber"
 
-        </com.google.android.material.textfield.TextInputLayout>
+                android:columnCount="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ExpirationDate"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="MM/YY"
+                    app:boxStrokeColor="#4AAC4F">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputtxtExpirationDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="5"
+                        android:inputType="date"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SecurityCode"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Security Code"
+                    app:boxStrokeColor="#4AAC4F">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputtxtSecurityCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="4"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/FirstName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="First Name"
-            app:boxStrokeColor="#4AAC4F">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/FirstName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="First Name"
+                    app:boxStrokeColor="#4AAC4F">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputtxtFirstName"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputtxtFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:inputType="textPersonName"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/LastName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Last Name"
+                    app:boxStrokeColor="#4AAC4F">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputtxtLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:inputType="textPersonName"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </GridLayout>
+            <Button
+                android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="textPersonName"/>
+                android:layout_below="@+id/Grid_Layout"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/rounded_gradient_heading"
+                android:text="Validate Your Card"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Amount"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnSubmit"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:hint="Enter Amount"
+                app:boxStrokeColor="#4AAC4F">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputtxtAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/LastName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Last Name"
-            app:boxStrokeColor="#4AAC4F">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputtxtLastName"
+            <Button
+                android:id="@+id/btnPay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="textPersonName"/>
+                android:layout_below="@+id/Amount"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/rounded_gradient_heading"
+                android:text="PAY With UPI's" />
 
-        </com.google.android.material.textfield.TextInputLayout>
 
-    </GridLayout>
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Grid_Layout"
-        android:layout_marginTop="70dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/rounded_gradient_heading"
-        android:text="SUBMIT PAYMENT"
-        android:backgroundTint="#4AAC4F"/>
 
-</RelativeLayout>
+        </RelativeLayout>
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
