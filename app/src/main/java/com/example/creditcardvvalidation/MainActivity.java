@@ -48,14 +48,10 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
             String working = s.toString();
 
             if (working.length() == 2 && before == 0) {
-
                 working += "/";
                 inputtxtExpirationDate.setText(working);
                 inputtxtExpirationDate.setSelection(working.length());
-
             }
-
-
         }
 
         @Override
@@ -93,25 +89,27 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
                     inputtxtAmount.requestFocus();
                     inputMethodManager1 = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager1.showSoftInput(inputtxtAmount, inputMethodManager1.SHOW_IMPLICIT);
+                } else {
+                    amount = inputtxtAmount.getText().toString().trim();
+                    int MainAmount = Math.round(Float.parseFloat(amount) * 100);
+                    Checkout checkout1 = new Checkout();
+                    checkout1.setKeyID("rzp_test_5HZySydZ73qHoN");
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("name", "Arkoooo");
+                        jsonObject.put("description", "Test Payment");
+                        jsonObject.put("theme.color", "#0093DD");
+                        jsonObject.put("currency", "INR");
+                        jsonObject.put("amount", MainAmount);
+                        checkout1.open(MainActivity.this, jsonObject);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                amount = inputtxtAmount.getText().toString().trim();
-                int MainAmount = Math.round(Float.parseFloat(amount) * 100);
-                Checkout checkout1 = new Checkout();
-                checkout1.setKeyID("rzp_test_5HZySydZ73qHoN");
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("name", "Arkoooo");
-                    jsonObject.put("description", "Test Payment");
-                    jsonObject.put("theme.color", "#0093DD");
-                    jsonObject.put("currency", "INR");
-                    jsonObject.put("amount", MainAmount);
-                    checkout1.open(MainActivity.this, jsonObject);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
             }
         });
+
+        
 
         Checkout.preload(getApplicationContext());
         Date c = Calendar.getInstance().getTime();
